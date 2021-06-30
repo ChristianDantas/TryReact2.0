@@ -6,12 +6,14 @@ class Consultas extends Component{
     super (props);
     this.state={
       ListaConsultasa:[],
-      alterDes:''
+      alterDes:'',
+      idConsultaAlterado:0,
+      idSituacao:0
     }
   }
 
   BuscarConsultas= () =>{
-    console.log();
+  
     fetch('http://localhost:5000/api/consulta')
     
     .then(responde=>responde.json())
@@ -24,6 +26,13 @@ class Consultas extends Component{
     
     this.BuscarConsultas()
 
+  }
+
+  BuscarConsultasPorId=(ListaConsultasa)=>{
+    this.setState({ 
+      idConsultaAlterado : ListaConsultasa.idConsulta,
+      idSituacao : ListaConsultasa.idSituacao,
+    })
   }
   render(){
     return(
@@ -42,23 +51,25 @@ class Consultas extends Component{
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                
                   {
                     this.state.ListaConsultasa.map((ListaConsultasa)=>{
                       return(
                         <tr key={ListaConsultasa.idConsulta} >
                           <td>{ListaConsultasa.idConsulta}</td>
                           
-                          <td>{ListaConsultasa.idMedico}</td>
-                          <td>{ListaConsultasa.idPaciente}</td>
-                          <td>{ListaConsultasa.idSituacao}</td>
+                          
+                          <td>{ListaConsultasa.idMedicoNavigation.nomeMedico}</td>
+                          <td>{ListaConsultasa.idPacienteNavigation.nomePaciente}</td>
+                          <td>{ListaConsultasa.idSituacaoNavigation.situacao1}</td>
                           <td>{ListaConsultasa.descricaoConsulta}</td>
                           <td>{ListaConsultasa.dataConsulta}</td>
+                          <td><button onClick={()=>this.BuscarConsultasPorId(ListaConsultasa)}>Editar</button></td>
                         </tr>
                       )
                     })
                   }
-                </tr>
+                
               </tbody>
             </table>
           </section>
