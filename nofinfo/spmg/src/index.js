@@ -4,8 +4,10 @@ import {Route, BrowserRouter as Router, Switch, Redirect} from 'react-router-dom
 import './index.css';
 import Consultas from './Pages/Consultas/Consultas';
 import NovasConsultas from './Pages/NovasConsultas/NovasConsultas';
+import Login from './Pages/Login/Login';
 import NotFound from './Pages/NotFound/NotFound';
 import reportWebVitals from './reportWebVitals';
+;
 
 
 const routing=(
@@ -14,6 +16,7 @@ const routing=(
       <Switch>
         <Route exact path="/" component={ Consultas } />
         <Route path="/novaconsulta" component={NovasConsultas} />
+        <Route path="/login" component={Login} />
         <Route path="/notfound" component={NotFound} /> 
         <Redirect to="/notfound"/>       
       </Switch>
