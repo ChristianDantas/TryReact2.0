@@ -1,0 +1,18 @@
+.tudo{
+    display: flex;
+}
+.medicoandando{
+
+    height: 58em;
+}
+.inputslogin{
+    display: flex;
+    flex-direction: column;
+    background-color: blue;
+    align-items: center;
+    width: 100%;
+}
+.email{
+    margin-top: 50%;
+    font-family: 'Courier New', Courier, monospace;
+}
