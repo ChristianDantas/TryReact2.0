@@ -1,12 +1,42 @@
-import {Component}  from 'react';
+import React,{Component}  from 'react';
+import axios from 'axios';
 class Login extends Component{
     constructor(props){
         super(props);
         this.state=  {
             email: "",
-            senha:"",
+            senha: "",
+            erroMensagem: "",
+            isLoading: false
         }
     }
+    Login=(event)=>{
+        event.preventDefault();
+        this.setState({erroMensagem : "", isLoading : true})
+        axios.post('http://localhost:5000/api/Login',{
+            Email : this.state.email,
+            Senha : this.state.senha
+        })
+        .then(resposta => {
+            if (resposta.status=== 200) {
+                localStorage.setItem('usuario-login', resposta.data.token)
+                console.log('meu token é ' + resposta.data.token)
+                this.setState({isLoading : false})
+                let base64=localStorage.getItem('usuario-login').split('.')[1]
+                console.log(base64)
+                console.log(window.atob(base64))
+                console.log(JSON.parse(window.atob(base64).jti))
+            }
+        })
+        .catch(()=>{
+            this.setState({erroMensagem: "E-mail ou senha invalidos! Tente novamente", isLoading :false})
+        })
+    }
+
+    atualizaStateCampo = (campo) => {
+        this.setState({ [campo.target.name]: campo.target.value }); 
+        
+      };
     render(){
         return(
             <div>
@@ -18,19 +48,31 @@ class Login extends Component{
                             type="text"
                             name="email"
                             value={this.state.email}
-                            onChange={this.AtualizaStateCampo}
+                            onChange={this.atualizaStateCampo}
                             placeholder="Email"
                             />
                             <input
                             type="password"
                             name="senha"
                             value={this.state.senha}
-                            onChange={this.AtualizaStateCampo}
+                            onChange={this.atualizaStateCampo}
                             placeholder="Senha"
                             />
-                            <button>
-                                Login
-                            </button>
+                            <p>{this.state.erroMensagem}</p>
+                            
+                            {
+                                this.state.isLoading=== true&&
+                                <button type="submit" disabled>Loading...</button>
+                            }
+                            {
+                                this.state.isLoading===false &&
+                                <button
+                                type="submit"
+                                disabled={this.state.senha === ''||this.state.email === '' ? 'none' : ''}
+                                >
+                                    Login
+                                </button>
+                            }
                         </form>
                     </section>
                 </main>

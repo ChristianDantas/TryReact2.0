@@ -8,7 +8,7 @@ class NovasConsultas extends Component{
             IdConsulta : '',
             idMedico : 0,
             idPaciente: 0,
-            idSituacao:0,
+            idSituacao2:0,
             descricaoConsulta: '',
             dataConsulta: new Date (),
             idConsultaAlterado: 0,
@@ -39,6 +39,7 @@ class NovasConsultas extends Component{
           }
           
          )}
+         
 
 
          
@@ -49,7 +50,7 @@ class NovasConsultas extends Component{
           idPaciente : this.state.idPaciente,
           idSituacao : this.state.idSituacao,
           descricaoConsulta : this.state.descricaoConsulta,
-          idSituacao : this.state.idSituacao}),
+          idSituacao2 : this.state.idSituacao}),
         headers:{
           "Content-Type" : "application/json"
       }
