@@ -116,6 +116,7 @@ class NovasConsultas extends Component{
                 <tr>
                   <th>idConsulta</th>
                   <th>idMedico</th>
+                  <th>idPaciente</th>
                   <th>idSituacao</th>
                   <th>Descricao</th>
                   <th>data</th>

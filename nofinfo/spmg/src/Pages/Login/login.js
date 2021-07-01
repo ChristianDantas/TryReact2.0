@@ -1,5 +1,6 @@
 import React,{Component}  from 'react';
 import axios from 'axios';
+import {parseJwt} from '../../services/auth';
 class Login extends Component{
     constructor(props){
         super(props);
@@ -19,14 +20,21 @@ class Login extends Component{
         })
         .then(resposta => {
             if (resposta.status=== 200) {
-                localStorage.setItem('usuario-login', resposta.data.token)
-                console.log('meu token é ' + resposta.data.token)
+                // localStorage.setItem('usuario-login', resposta.data.token)
+                // console.log('meu token é ' + resposta.data.token)
                 this.setState({isLoading : false})
-                let base64=localStorage.getItem('usuario-login').split('.')[1]
-                console.log(base64)
-                console.log(window.atob(base64))
-                console.log(JSON.parse(window.atob(base64).jti))
+                // let base64=localStorage.getItem('usuario-login').split('.')[1]
+                // console.log(base64)
+                // console.log(window.atob(base64))
+                // console.log(JSON.parse(window.atob(base64)))
+               console.log(parseJwt())
+                if (parseJwt.role== 1 || 3) {
+                    this.props.history.push('/NovasConsultas');
+                } else {
+                    
+                }
             }
+            // this.props.history.push('/NotFound');
         })
         .catch(()=>{
             this.setState({erroMensagem: "E-mail ou senha invalidos! Tente novamente", isLoading :false})
