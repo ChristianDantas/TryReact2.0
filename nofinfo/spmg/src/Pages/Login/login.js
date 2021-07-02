@@ -20,18 +20,18 @@ class Login extends Component{
         })
         .then(resposta => {
             if (resposta.status=== 200) {
-                // localStorage.setItem('usuario-login', resposta.data.token)
-                // console.log('meu token é ' + resposta.data.token)
+                //  localStorage.setItem('usuario-login', resposta.data.token)
+                //  console.log('meu token é ' + resposta.data.token)
                 this.setState({isLoading : false})
-                // let base64=localStorage.getItem('usuario-login').split('.')[1]
-                // console.log(base64)
-                // console.log(window.atob(base64))
-                // console.log(JSON.parse(window.atob(base64)))
-               console.log(parseJwt())
-                if (parseJwt.role== 1 || 3) {
-                    this.props.history.push('/NovasConsultas');
+            //      let base64=localStorage.getItem('usuario-login').split('.')[1]
+            //      console.log(base64)
+            //      console.log(window.atob(base64))
+            //      console.log(JSON.parse(window.atob(base64)))
+            //    console.log(base64.role)
+                if (parseJwt.role=== "1" || "3") {
+                    this.props.history.push('/novaconsulta');
                 } else {
-                    
+                    this.props.history.push('/consultas');
                 }
             }
             // this.props.history.push('/NotFound');

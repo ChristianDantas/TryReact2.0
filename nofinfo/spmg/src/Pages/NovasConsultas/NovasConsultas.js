@@ -1,4 +1,6 @@
+import axios from 'axios';
 import {Component}  from 'react';
+
 
 class NovasConsultas extends Component{
     constructor(props){
@@ -19,7 +21,7 @@ class NovasConsultas extends Component{
     }
     BuscarConsultas= () =>{
   
-      fetch('http://localhost:5000/api/consulta')
+      fetch('http://localhost:5000/api/consulta/')
       
       .then(responde=>responde.json())
   
@@ -30,11 +32,11 @@ class NovasConsultas extends Component{
     CadastrarConsultas= (event) =>{
       event.preventDefault();
       if (this.state.idConsultaAlterado !== 0) {
-         fetch('http://localhost:5000/api/consulta/' + this.state.idConsultaAlterado,{
-           method :'PATCH',
-           body: JSON.stringify({Situacao1 : this.state.idSituacao}),
+         axios.patch('http://localhost:5000/api/consulta/' + this.state.idConsultaAlterado,{
+          Situacao1 : this.state.idSituacao,
            headers:{
-            "Content-Type" : "application/json"
+            "Content-Type" : "application/json",
+            'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
            }
           }
           
@@ -44,17 +46,19 @@ class NovasConsultas extends Component{
 
          
         else {
-        fetch('http://localhost:5000/api/consulta',{
-        method: 'POST',
-        body: JSON.stringify({idMedico : this.state.idMedico,
+        axios.post('http://localhost:5000/api/consulta',{
+          idMedico : this.state.idMedico,
           idPaciente : this.state.idPaciente,
           idSituacao : this.state.idSituacao,
           descricaoConsulta : this.state.descricaoConsulta,
-          idSituacao2 : this.state.idSituacao}),
-        headers:{
-          "Content-Type" : "application/json"
-      }
-    })
+          idSituacao2 : this.state.idSituacao,
+          headers:{
+            "Content-Type" : "application/json",
+            'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
+        }},
+        
+      
+    )
         }
       
       
@@ -64,15 +68,16 @@ class NovasConsultas extends Component{
     AtualizaDescricao= (event) =>{
       event.preventDefault();
       
-         fetch('http://localhost:5000/api/consulta/descricao/' + this.state.idConsultaAlterado,{
-           method :'PATCH',
-           body: JSON.stringify({DescricaoConsulta : this.state.descricaoConsulta}),
+         axios.patch('http://localhost:5000/api/consulta/descricao/' + this.state.idConsultaAlterado, this.state.descricaoConsulta,{
+
            headers:{
-            "Content-Type" : "application/json"
+            'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
            }
+           
           }
           
          )
+         console.log('foi fml')
     }
 
     attmedicoo= async (campo) => {
