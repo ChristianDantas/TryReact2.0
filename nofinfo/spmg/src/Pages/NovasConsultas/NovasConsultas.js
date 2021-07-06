@@ -10,7 +10,7 @@ class NovasConsultas extends Component {
       IdConsulta: '',
       idMedico: 0,
       idPaciente: 0,
-      idSituacao: 0,
+      idSituacao: '',
       descricaoConsulta: '',
       dataConsulta: new Date(),
       idConsultaAlterado: 0,
@@ -36,7 +36,7 @@ class NovasConsultas extends Component {
         Situacao1: this.state.idSituacao,
         headers: {
           "Content-Type": "application/json",
-         // 'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
+          'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
         }
       }
 
@@ -73,7 +73,7 @@ class NovasConsultas extends Component {
     axios.patch('http://localhost:5000/api/consulta/descricao/' + this.state.idConsultaAlterado, {
       descricaoConsulta: this.state.descricaoConsulta,
       headers: {
-        'Access-Control-Allow-Origin': '*',
+        //'Access-Control-Allow-Origin': '*',
         'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
       }
 
