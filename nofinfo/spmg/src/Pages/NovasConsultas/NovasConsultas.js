@@ -13,7 +13,7 @@ class NovasConsultas extends Component {
       idSituacao: '',
       descricaoConsulta: '',
       dataConsulta: new Date(),
-      idConsultaAlterado: 0,
+      idConsultaAlterado: 0
     }
 
 
@@ -21,7 +21,7 @@ class NovasConsultas extends Component {
   }
   BuscarConsultas = () => {
 
-    fetch('http://localhost:5000/api/consulta/')
+    fetch('http://localhost:5000/api/consulta')
 
       .then(responde => responde.json())
 
@@ -37,6 +37,7 @@ class NovasConsultas extends Component {
         headers: {
           "Content-Type": "application/json",
           'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
+          
         }
       }
 
@@ -47,7 +48,7 @@ class NovasConsultas extends Component {
 
 
     else {
-      axios.post('http://localhost:5000/api/consulta', {
+      axios.post('http://localhost:5000/api/consulta/', {
         idMedico: this.state.idMedico,
         idPaciente: this.state.idPaciente,
         idSituacao: this.state.idSituacao,
@@ -73,19 +74,20 @@ class NovasConsultas extends Component {
     axios.patch('http://localhost:5000/api/consulta/descricao/' + this.state.idConsultaAlterado, {
       descricaoConsulta: this.state.descricaoConsulta,
       headers: {
-        //'Access-Control-Allow-Origin': '*',
-        'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
+       // 'Access-Control-Allow-Origin': '*',
+       // 'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
       }
-
+      
     }
-
+    
     )
     console.log('foi fml')
   }
 
-  attmedicoo = async (campo) => {
+  AtualizaState = async (campo) => {
     await this.setState({ [campo.target.name]: campo.target.value })
     console.log('id da situacao ' + this.state.idSituacao)
+    console.log('id da situacao ' + this.state.descricaoConsulta)
   };
 
 
@@ -141,7 +143,7 @@ class NovasConsultas extends Component {
 
                         <td>{consulta.idMedicoNavigation.nomeMedico}</td>
                         <td>{consulta.idPacienteNavigation.nomePaciente}</td>
-                        <td>{consulta.idSituacaoNavigation.situacao1}</td>
+                        <td>{consulta.idSituacao}</td>
                         <td>{consulta.descricaoConsulta}</td>
                         <td>{consulta.dataConsulta}</td>
 
@@ -155,15 +157,15 @@ class NovasConsultas extends Component {
               </tbody>
             </table>
             <form onSubmit={this.CadastrarConsultas}>
-              <input type="number" name="idMedico" value={this.state.idMedico} onChange={this.attmedicoo} placeholder="Insira idMedico" />
-              <input type="number" name="idPaciente" value={this.state.idPaciente} onChange={this.attmedicoo} placeholder="Insira idpaciente" />
-              <input type="text" name="descricaoConsulta" value={this.state.descricaoConsulta} onChange={this.attmedicoo} placeholder="Insira a descrição" />
-              <input type="text" name="dataConsulta" value={this.state.dataConsulta} onChange={this.attmedicoo} placeholder="Insira a data" />
-              <input type="number" name="idSituacao" value={this.state.idSituacao} onChange={this.attmedicoo} placeholder="Insira a situação" />
+              <input type="number" name="idMedico" value={this.state.idMedico} onChange={this.AtualizaState} placeholder="Insira idMedico" />
+              <input type="number" name="idPaciente" value={this.state.idPaciente} onChange={this.AtualizaState} placeholder="Insira idpaciente" />
+              <input type="text" name="descricaoConsulta" value={this.state.descricaoConsulta} onChange={this.AtualizaState} placeholder="Insira a descrição" />
+              <input type="text" name="dataConsulta" value={this.state.dataConsulta} onChange={this.AtualizaState} placeholder="Insira a data" />
+              <input type="number" name="idSituacao" value={this.state.idSituacao} onChange={this.AtualizaState} placeholder="Insira a situação" />
               <button type="submit">Cadastrar</button>
             </form>
             <form onSubmit={this.AtualizaDescricao}>
-              <input type="text" name="descricaoConsulta" value={this.state.descricaoConsulta} onChange={this.attmedicoo} placeholder="Insira a descrição" />
+              <input type="text" name="descricaoConsulta" value={this.state.descricaoConsulta} onChange={this.AtualizaState} placeholder="Insira a descrição" />
               <button type="submit">Atualiza coisa linda</button>
             </form>
 
