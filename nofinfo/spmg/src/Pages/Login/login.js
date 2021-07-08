@@ -20,10 +20,10 @@ class Login extends Component{
         })
         .then(resposta => {
             if (resposta.status=== 200) {
-                 localStorage.setItem('usuario-login', resposta.data.token)
+                 localStorage.setItem('Usuario-login', resposta.data.token)
                   console.log('meu token é ' + resposta.data.token)
                 this.setState({isLoading : false})
-                  let base64=localStorage.getItem('usuario-login').split('.')[1]
+                  let base64=localStorage.getItem('Usuario-login').split('.')[1]
                   console.log(base64)
                  
                 console.log(base64.role)

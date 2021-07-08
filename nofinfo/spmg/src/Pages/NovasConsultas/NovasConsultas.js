@@ -31,12 +31,13 @@ class NovasConsultas extends Component {
 
   CadastrarConsultas = (event) => {
     event.preventDefault();
+    const token= localStorage.getItem('Usuario-login')
     if (this.state.idConsultaAlterado !== 0) {
       axios.patch('http://localhost:5000/api/consulta/' + this.state.idConsultaAlterado, {
         Situacao1: this.state.idSituacao,
         headers: {
           "Content-Type": "application/json",
-          'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
+          'Authorization': 'Bearer ' + token
           
         }
       }
