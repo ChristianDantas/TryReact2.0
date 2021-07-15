@@ -14,9 +14,9 @@ const routing=(
   <Router>
     <div>
       <Switch>
-        <Route exact path="/consulta" component={ Consultas } />
+        <Route  path="/consulta" component={ Consultas } />
         <Route path="/novaconsulta" component={NovasConsultas} />
-        <Route path="/login" component={Login} />
+        <Route exact path="/" component={Login} />
         <Route path="/notfound" component={NotFound} /> 
         <Redirect to="/notfound"/>       
       </Switch>

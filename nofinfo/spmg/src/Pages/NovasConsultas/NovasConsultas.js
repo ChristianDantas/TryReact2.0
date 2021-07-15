@@ -156,14 +156,20 @@ class NovasConsultas extends Component {
             </table>
             <form onSubmit={this.CadastrarConsultas}>
               <input type="number" name="idMedico" value={this.state.idMedico} onChange={this.attmedicoo} placeholder="Insira idMedico" />
+
               <input type="number" name="idPaciente" value={this.state.idPaciente} onChange={this.attmedicoo} placeholder="Insira idpaciente" />
+
               <input type="text" name="descricaoConsulta" value={this.state.descricaoConsulta} onChange={this.attmedicoo} placeholder="Insira a descrição" />
+
               <input type="text" name="dataConsulta" value={this.state.dataConsulta} onChange={this.attmedicoo} placeholder="Insira a data" />
+
               <input type="number" name="idSituacao" value={this.state.idSituacao} onChange={this.attmedicoo} placeholder="Insira a situação" />
+
               <button type="submit">Cadastrar</button>
             </form>
             <form onSubmit={this.AtualizaDescricao}>
               <input type="text" name="descricaoConsulta" value={this.state.descricaoConsulta} onChange={this.attmedicoo} placeholder="Insira a descrição" />
+              
               <button type="submit">Atualiza coisa linda</button>
             </form>
 
