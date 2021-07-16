@@ -14,10 +14,17 @@ const routing=(
   <Router>
     <div>
       <Switch>
+<<<<<<< HEAD
         <Route  path="/consulta" component={ Consultas } />
         <Route path="/novaconsulta" component={NovasConsultas} />
         <Route exact path="/" component={Login} />
         <Route path="/notfound" component={NotFound} /> 
+=======
+        <Route exact path="/" component={ Login } />
+        <Route path="/novaconsulta" component={NovasConsultas} />
+        <Route path="/consultas" component={Consultas} />
+        <Route exact path="/notfound" component={NotFound} /> 
+>>>>>>> 1df76136b09c35f0448f84dde8b875c4499f9b68
         <Redirect to="/notfound"/>       
       </Switch>
     </div>
